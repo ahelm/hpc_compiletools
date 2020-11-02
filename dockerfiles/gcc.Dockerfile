@@ -33,6 +33,7 @@ RUN \
   tar -xvf openmpi-${OPENMPI_VERSION}.tar.bz2 && \
   cd openmpi-${OPENMPI_VERSION} && \
   ./configure --prefix=${MPI_ROOT} && \
+  make -j && \ 
   make install && \
   cd .. && \
   rm -rf openmpi-${OPENMPI_VERSION} openmpi-${OPENMPI_VERSION}.tar.bz2
@@ -59,6 +60,7 @@ RUN \
   tar -xzvf szip-${SZIP_VERSION}.tar.gz && \
   cd szip-${SZIP_VERSION} && \
   ./configure --prefix=${SZIP_ROOT} && \
+  make -j && \ 
   make install && \
   cd .. && \
   rm -rf szip-${SZIP_VERSION} szip-${SZIP_VERSION}.tar.gz
@@ -88,10 +90,8 @@ RUN \
   echo "${HDF5_SHA256} hdf5-${HDF5_VERSION}.tar.bz2" | sha256sum -c && \
   tar -xvf hdf5-${HDF5_VERSION}.tar.bz2 && \
   cd hdf5-${HDF5_VERSION} && \
-  ./configure \
-    --prefix=${HDF5_ROOT} \
-    --enable-fortran \
-    --enable-cxx && \
+  ./configure --prefix=${HDF5_ROOT} --enable-fortran --enable-cxx && \
+  make -j && \
   make install && \
   cd .. && \
   rm -rf hdf5-${HDF5_VERSION} hdf5-${HDF5_VERSION}.tar.bz2
