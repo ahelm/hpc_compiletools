@@ -17,4 +17,4 @@ jobs:
     - name: Build the Docker image
       run: docker build . --file dockerfiles/gcc.Dockerfile --tag hpc_compiletools/gcc:latest
     - name: Run tests
-      run: ./runtest.sh
+      run: sudo ./runtest.sh
