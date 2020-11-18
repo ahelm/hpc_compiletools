@@ -14,7 +14,17 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build . --file dockerfiles/gcc.Dockerfile --tag hpc_compiletools/gcc:latest
-    - name: Run tests
-      run: ./runtest.sh hpc_compiletools/gcc:latest
+    # - name: Build the Docker image
+    #   run: docker build . --file dockerfiles/gcc.Dockerfile --tag hpc_compiletools/gcc:latest
+    # - name: Run tests
+    #   run: ./runtest.sh hpc_compiletools/gcc:latest
+    - name: Build dummy bash image
+      run: docker pull bash && docker tag bash blub:latest
+    - name: Push to GitHub Packages
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ github.actor }}
+        password: ${{ secrets.GITHUB_TOKEN }}
+        registry: docker.pkg.github.com
+        repository: ahelm/hpc_compiletools/blub:latest
+        tag_with_ref: true
