@@ -18,13 +18,11 @@ jobs:
     #   run: docker build . --file dockerfiles/gcc.Dockerfile --tag hpc_compiletools/gcc:latest
     # - name: Run tests
     #   run: ./runtest.sh hpc_compiletools/gcc:latest
-    - name: Build dummy bash image
-      run: docker pull bash && docker tag bash blub:latest
     - name: Push to GitHub Packages
-      uses: docker/build-push-action@v1
+      uses: docker/build-push-action@v2
       with:
-        username: ${{ github.actor }}
-        password: ${{ secrets.GITHUB_TOKEN }}
-        registry: docker.pkg.github.com
-        repository: ahelm/hpc_compiletools/blub:latest
-        tag_with_ref: true
+        context: .
+        file: ./dockerfiles/dummy.Dockerfile
+        push: true
+        tags: ahelm/dummy:latest
+
