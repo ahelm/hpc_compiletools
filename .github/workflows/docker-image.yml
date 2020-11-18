@@ -23,7 +23,9 @@ jobs:
     - name: Fixes permission for writing
       run: echo $USER
     - name: Echo user name of docker container
-      run: docker run -v $(pwd):/project testcontainer:latest bash -c "ls -lisa"
+      run: docker run -v $(pwd):/project testcontainer:latest bash -c "id"
+    - name: Echo user name of docker container
+      run: docker run -v $(pwd):/project testcontainer:latest bash -c "cat /etc/passwd"
     - name: Run minitest.sh
       run: ./minitest.sh testcontainer:latest
 
