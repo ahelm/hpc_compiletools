@@ -19,7 +19,7 @@ jobs:
     # - name: Run tests
     #   run: sudo ./runtest.sh
     - name: Build simple image
-      run: docker build . --file dockerfiles/alpine-test.Dockerfile --tag testcontainer:latest
+      run: docker build . --file dockerfiles/ubuntu-test.Dockerfile --tag testcontainer:latest
     - name: Run minitest.sh
       run: ./minitest.sh testcontainer:latest
 
