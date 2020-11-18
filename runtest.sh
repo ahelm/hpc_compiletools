@@ -37,7 +37,7 @@ run() {
   #       in the output.
   #
   echo "> on '$1' running: $2"
-  cmd="docker run -v $(pwd):/project $1 bash -c '$2'"
+  cmd="docker run -it -v $(pwd):/project $1 bash -c '$2'"
   output=$(eval $cmd)
   [ $? -ne 0 ] && abort
   if [[ -n $3 ]]; then
@@ -54,39 +54,39 @@ fi
 # TESTS
 ######################################################################
 # checks user name
-run 'hpc_compiletools/gcc:latest' 'id' 'hpc_user'
+run "$1" 'id' 'hpc_user'
 
 # gcc latest
 run \
-  'hpc_compiletools/gcc:latest' \
+  "$1" \
   'gcc ${HPC_C_COMPILE_ARGS} ${HPC_C_LINK_ARGS} -o test/tmp_output/hello-mpi-c.out test/hello_mpi.c'
 run \
-  'hpc_compiletools/gcc:latest' \
+  "$1" \
   'test/tmp_output/hello-mpi-c.out' \
   'hello from MPI in C'
 
 run \
-  'hpc_compiletools/gcc:latest' \
+  "$1" \
   'gfortran ${HPC_F_COMPILE_ARGS} ${HPC_F_LINK_ARGS} -o test/tmp_output/hello-mpi-fortran.out test/hello_mpi.f90'
 run \
-  'hpc_compiletools/gcc:latest' \
+  "$1" \
   'test/tmp_output/hello-mpi-fortran.out' \
   'hello from MPI in Fortran'
 
 run \
-  'hpc_compiletools/gcc:latest' \
+  "$1" \
   'gcc ${HPC_C_COMPILE_ARGS} ${HPC_C_LINK_ARGS} -o test/tmp_output/hello-hdf5-c.out test/hello_hdf5.c'
 run \
-  'hpc_compiletools/gcc:latest' \
+  "$1" \
   'test/tmp_output/hello-hdf5-c.out' \
   'hello from HDF5 in C'
 
 
 run \
-  'hpc_compiletools/gcc:latest' \
+  "$1" \
   'gfortran ${HPC_F_COMPILE_ARGS} ${HPC_F_LINK_ARGS} -o test/tmp_output/hello-hdf5-fortran.out test/hello_hdf5.f90'
 run \
-  'hpc_compiletools/gcc:latest' \
+  "$1" \
   'test/tmp_output/hello-hdf5-fortran.out' \
   'hello from HDF5 in Fortran'
 
