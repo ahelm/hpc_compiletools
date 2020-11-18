@@ -7,10 +7,12 @@ on:
     branches: [ master ]
 
 jobs:
-
-  build:
-
+  build_and_publish:
+    name: Build GCC version ${{ matrix.version }}
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        version: [6, 7, 8, 9, 10, latest]
 
     steps:
     - uses: actions/checkout@v2
@@ -25,6 +27,6 @@ jobs:
       with:
         context: .
         file: ./dockerfiles/gcc.Dockerfile
-        build-args: VERSION=latest
-        tags: ahelm/hpc_compiletools_gcc:latest
+        build-args: VERSION=${{ matrix.version }}
+        tags: ahelm/hpc_compiletools_gcc:${{ matrix.version }}
         push: true
