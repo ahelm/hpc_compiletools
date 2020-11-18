@@ -38,5 +38,5 @@ jobs:
       with:
         context: .
         file: ./dockerfiles/dummy.Dockerfile
-        tags: dummy:latest
+        tags: ahelm/dummy_container_test:latest
         push: true
