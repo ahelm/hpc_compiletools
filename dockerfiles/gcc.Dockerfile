@@ -28,13 +28,13 @@ ENV HPC_F_LINK_ARGS="-pthread -I${MPI_LIB} -Wl,-rpath -Wl,${MPI_LIB} -Wl,--enabl
 ENV PATH="${MPI_BIN}:${PATH}"
 
 RUN \
-  wget https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-${OPENMPI_VERSION}.tar.bz2 && \
+  wget -o /dev/null https://download.open-mpi.org/release/open-mpi/v4.0/openmpi-${OPENMPI_VERSION}.tar.bz2 && \
   echo "${OPENMPI_SHA256} openmpi-${OPENMPI_VERSION}.tar.bz2" | sha256sum -c && \
-  tar -xvf openmpi-${OPENMPI_VERSION}.tar.bz2 && \
+  tar -xf openmpi-${OPENMPI_VERSION}.tar.bz2 && \
   cd openmpi-${OPENMPI_VERSION} && \
   ./configure --prefix=${MPI_ROOT} && \
   make -j && \ 
-  make install && \
+  make install > /dev/null && \
   cd .. && \
   rm -rf openmpi-${OPENMPI_VERSION} openmpi-${OPENMPI_VERSION}.tar.bz2
 
@@ -55,13 +55,13 @@ ENV HPC_F_COMPILE_ARGS="-I${SZIP_INCLUDE} ${HPC_F_COMPILE_ARGS}"
 ENV HPC_F_LINK_ARGS="-Wl,-rpath -Wl,${SZIP_LIB} -L${SZIP_LIB} -lsz ${HPC_F_LINK_ARGS}"
 
 RUN \
-  wget https://support.hdfgroup.org/ftp/lib-external/szip/${SZIP_VERSION}/src/szip-${SZIP_VERSION}.tar.gz && \
+  wget -o /dev/null https://support.hdfgroup.org/ftp/lib-external/szip/${SZIP_VERSION}/src/szip-${SZIP_VERSION}.tar.gz && \
   echo "${SZIP_SHA256} szip-${SZIP_VERSION}.tar.gz" | sha256sum -c && \
-  tar -xzvf szip-${SZIP_VERSION}.tar.gz && \
+  tar -xzf szip-${SZIP_VERSION}.tar.gz && \
   cd szip-${SZIP_VERSION} && \
   ./configure --prefix=${SZIP_ROOT} && \
   make -j && \ 
-  make install && \
+  make install > /dev/null && \
   cd .. && \
   rm -rf szip-${SZIP_VERSION} szip-${SZIP_VERSION}.tar.gz
 
@@ -86,13 +86,13 @@ ENV HPC_F_LINK_ARGS="-Wl,-rpath -Wl,${HDF5_LIB} -L${HDF5_LIB} -lhdf5hl_fortran -
 ENV PATH="${HDF5_BIN}:${PATH}"
 
 RUN \
-  wget https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-${HDF5_SHORT_VER}/hdf5-${HDF5_VERSION}/src/hdf5-${HDF5_VERSION}.tar.bz2 && \
+  wget -o /dev/null https://support.hdfgroup.org/ftp/HDF5/releases/hdf5-${HDF5_SHORT_VER}/hdf5-${HDF5_VERSION}/src/hdf5-${HDF5_VERSION}.tar.bz2 && \
   echo "${HDF5_SHA256} hdf5-${HDF5_VERSION}.tar.bz2" | sha256sum -c && \
-  tar -xvf hdf5-${HDF5_VERSION}.tar.bz2 && \
+  tar -xf hdf5-${HDF5_VERSION}.tar.bz2 && \
   cd hdf5-${HDF5_VERSION} && \
   ./configure --prefix=${HDF5_ROOT} --enable-fortran --enable-cxx && \
   make -j && \
-  make install && \
+  make install > /dev/null && \
   cd .. && \
   rm -rf hdf5-${HDF5_VERSION} hdf5-${HDF5_VERSION}.tar.bz2
 
