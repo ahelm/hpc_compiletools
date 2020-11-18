@@ -37,7 +37,7 @@ run() {
   #       in the output.
   #
   echo "> on '$1' running: $2"
-  cmd="docker run -it -v $(pwd):/project $1 bash -c '$2'"
+  cmd="docker run -v $(pwd):/project $1 bash -c '$2'"
   output=$(eval $cmd)
   [ $? -ne 0 ] && abort
   if [[ -n $3 ]]; then
