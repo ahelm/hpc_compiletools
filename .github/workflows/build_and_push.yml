@@ -26,6 +26,7 @@ jobs:
         # build-args: VERSION=${{ matrix.version }}
         tags: hpc_compiletools_gcc:${{ matrix.version }}
         push: false
+        load: true
     - name: List all available images
       run: docker image ls
 
