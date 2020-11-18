@@ -96,7 +96,4 @@ RUN \
   cd .. && \
   rm -rf hdf5-${HDF5_VERSION} hdf5-${HDF5_VERSION}.tar.bz2
 
-RUN groupadd -r hpc_user && useradd -r -g hpc_user hpc_user
-USER hpc_user
-
 WORKDIR /project

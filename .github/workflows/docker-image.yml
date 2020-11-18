@@ -14,12 +14,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    # - name: Build the Docker image
-    #   run: docker build . --file dockerfiles/gcc.Dockerfile --tag hpc_compiletools/gcc:latest
-    # - name: Run tests
-    #   run: sudo ./runtest.sh
-    - name: Build simple image
-      run: docker build . --file dockerfiles/ubuntu-test.Dockerfile --tag testcontainer:latest
-    - name: Run minitest.sh
-      run: ./minitest.sh testcontainer:latest
-
+    - name: Build the Docker image
+      run: docker build . --file dockerfiles/gcc.Dockerfile --tag hpc_compiletools/gcc:latest
+    - name: Run tests
+      run: ./runtest.sh hpc_compiletools/gcc:latest

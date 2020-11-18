@@ -37,7 +37,7 @@ run() {
   #       in the output.
   #
   echo "> on '$1' running: $2"
-  cmd="docker run -it -v $(pwd):/project $1 bash -c '$2'"
+  cmd="docker run --user $(id -u):$(id -g) -v $(pwd):/project $1 bash -c '$2'"
   output=$(eval $cmd)
   [ $? -ne 0 ] && abort
   if [[ -n $3 ]]; then
@@ -54,7 +54,7 @@ fi
 # TESTS
 ######################################################################
 # checks user name
-run "$1" 'id' 'hpc_user'
+run "$1" 'id' "$(id -u)"
 
 # gcc latest
 run \
