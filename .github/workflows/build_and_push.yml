@@ -28,10 +28,10 @@ jobs:
         context: .
         file: ./dockerfiles/gcc.Dockerfile
         build-args: VERSION=${{ matrix.version }}
-        tags: ahelm/hpc_compiletools_gcc:${{ matrix.version }}
+        tags: hpc_compiletools_gcc:${{ matrix.version }}
         push: false
     - name: Run tests
-      run: ./runtest.sh ahelm/hpc_compiletools_gcc:${{ matrix.version }}
+      run: ./runtest.sh hpc_compiletools_gcc:${{ matrix.version }}
     - name: Push
       uses: docker/build-push-action@v2
       with:
