@@ -8,7 +8,7 @@ on:
 
 jobs:
   build_and_publish:
-    name: Build GCC version ${{ matrix.version }}
+    name: Building 'hpc_compiletools_gcc:${{ matrix.version }}'
     runs-on: ubuntu-latest
     strategy:
       matrix:
